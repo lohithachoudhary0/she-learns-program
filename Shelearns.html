@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>She Learns Program</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #f8f3ec;
+      --sand: #eadfcf;
+      --sage: #c6d3c0;
+      --forest: #173a34;
+      --forest-soft: #214841;
+      --gold: #c68b59;
+      --text: #24312f;
+      --muted: #61716d;
+      --white: #ffffff;
+      --shadow: 0 18px 45px rgba(23, 58, 52, 0.12);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max-width: 1220px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #fcfaf6 0%, #f6efe5 100%);
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(var(--max-width), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 88px 0;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      margin-bottom: 14px;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      line-height: 1.15;
+      color: var(--forest);
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      margin-bottom: 18px;
+    }
+
+    h3 {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.3s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--forest);
+      color: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-primary:hover {
+      background: var(--forest-soft);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.86);
+      border-color: rgba(23,58,52,0.15);
+      color: var(--forest);
+    }
+
+    .btn-secondary:hover {
+      background: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+      background: rgba(248, 243, 236, 0.88);
+      border-bottom: 1px solid rgba(23, 58, 52, 0.08);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 82px;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 800;
+      color: var(--forest);
+    }
+
+    .brand-mark {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--gold), #e7b07b);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      box-shadow: var(--shadow);
+    }
+
+    .brand small {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+      font-weight: 600;
+      color: var(--forest);
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .hero {
+      padding: 46px 0 80px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .hero-copy {
+      padding: 18px 0;
+    }
+
+    .hero-copy p {
+      max-width: 620px;
+      font-size: 1.08rem;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 36px;
+    }
+
+    .stat-card {
+      background: rgba(255,255,255,0.8);
+      border: 1px solid rgba(23,58,52,0.08);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 1.8rem;
+      color: var(--forest);
+      margin-bottom: 6px;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 640px;
+    }
+
+    .image-main,
+    .image-small,
+    .hero-badge {
+      position: absolute;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .image-main {
+      inset: 40px 0 0 40px;
+    }
+
+    .image-main img,
+    .image-small img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-small {
+      width: 250px;
+      height: 290px;
+      left: 0;
+      bottom: 10px;
+      border: 8px solid rgba(255,255,255,0.88);
+    }
+
+    .hero-badge {
+      right: 10px;
+      top: 0;
+      background: rgba(255,255,255,0.94);
+      padding: 22px;
+      width: 240px;
+      border: 1px solid rgba(23,58,52,0.08);
+    }
+
+    .hero-badge strong {
+      display: block;
+      color: var(--forest);
+      font-size: 1.3rem;
+      margin-bottom: 6px;
+    }
+
+    .shape {
+      position: absolute;
+      inset: 80px 20px 20px 80px;
+      background: linear-gradient(180deg, rgba(198,211,192,0.45), rgba(234,223,207,0.45));
+      border-radius: 60px;
+      z-index: -1;
+    }
+
+    .mission-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+    }
+
+    .mission-card,
+    .card {
+      background: rgba(255,255,255,0.85);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+      border: 1px solid rgba(23,58,52,0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .pill {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: #f3ede3;
+      color: var(--forest);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .program-grid,
+    .impact-grid,
+    .partner-grid,
+    .contact-grid,
+    .footer-grid {
+      display: grid;
+      gap: 22px;
+    }
+
+    .program-grid {
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 24px;
+    }
+
+    .program-card {
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      background: rgba(255,255,255,0.84);
+      border: 1px solid rgba(23,58,52,0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .program-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #f0d9c1, #e7f0e1);
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+    }
+
+    .impact-grid {
+      grid-template-columns: 0.95fr 1.05fr;
+      align-items: center;
+    }
+
+    .impact-image {
+      border-radius: 38px;
+      overflow: hidden;
+      min-height: 520px;
+      box-shadow: var(--shadow);
+    }
+
+    .impact-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .impact-list {
+      display: grid;
+      gap: 18px;
+      margin-top: 26px;
+    }
+
+    .impact-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid rgba(23,58,52,0.08);
+    }
+
+    .impact-item span {
+      min-width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--forest);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+    }
+
+    .partner-grid {
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 26px;
+    }
+
+    .partner-card {
+      background: rgba(255,255,255,0.82);
+      border-radius: 20px;
+      padding: 24px;
+      text-align: center;
+      border: 1px solid rgba(23,58,52,0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .partner-logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      margin: 0 auto 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #e9f0e5, #f4e6d7);
+      color: var(--forest);
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    .cta-panel {
+      background: linear-gradient(135deg, var(--forest), #285249);
+      color: white;
+      border-radius: 40px;
+      padding: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-panel h2,
+    .cta-panel p {
+      color: white;
+    }
+
+    .contact-grid {
+      grid-template-columns: 1fr 1fr;
+      margin-top: 28px;
+      align-items: start;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      width: 100%;
+      border: 1px solid rgba(23,58,52,0.12);
+      background: rgba(255,255,255,0.88);
+      border-radius: 16px;
+      padding: 15px 16px;
+      font: inherit;
+      color: var(--text);
+      outline: none;
+    }
+
+    .contact-form textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    footer {
+      padding: 28px 0 42px;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1.2fr 0.8fr 0.8fr 1fr;
+      padding-top: 24px;
+      border-top: 1px solid rgba(23,58,52,0.08);
+    }
+
+    .footer-links {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      color: var(--muted);
+    }
+
+    .copyright {
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .mission-wrap,
+      .impact-grid,
+      .contact-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .program-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .partner-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-visual {
+        min-height: 580px;
+      }
+
+      .cta-panel {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 760px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 18px 0;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 14px;
+      }
+
+      .nav-actions {
+        width: 100%;
+        flex-wrap: wrap;
+      }
+
+      .hero {
+        padding-top: 26px;
+      }
+
+      .hero-stats,
+      .program-grid,
+      .partner-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        min-height: 470px;
+      }
+
+      .image-main {
+        inset: 30px 0 0 20px;
+      }
+
+      .image-small {
+        width: 180px;
+        height: 200px;
+      }
+
+      .hero-badge {
+        width: 190px;
+        padding: 18px;
+      }
+
+      .section {
+        padding: 70px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container">
+      <nav>
+        <a href="#home" class="brand">
+          <div class="brand-mark">S</div>
+          <div>
+            She Learns Program
+            <small>Education • Equity • Opportunity</small>
+          </div>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#impact">Impact</a></li>
+          <li><a href="#partners">Partners</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+          <a class="btn btn-secondary" href="#volunteer">Volunteer</a>
+          <a class="btn btn-primary" href="#donate">Donate</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Rural education initiative</span>
+          <h1>Helping women in rural Guizhou learn, grow, and lead.</h1>
+          <p>
+            The She Learns Program is a social club and community initiative dedicated to expanding educational access for women and girls in rural Guizhou. Through literacy support, digital skills, learning spaces, and strong community partnerships, we help create long-term opportunity with dignity and care.
+          </p>
+
+          <div class="btn-group">
+            <a class="btn btn-primary" href="#register">Register</a>
+            <a class="btn btn-secondary" href="#volunteer">Volunteer</a>
+            <a class="btn btn-secondary" href="#donate">Donate</a>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat-card">
+              <strong>Educate</strong>
+              <p>Volunteer now to teach the women in Guizhou.</p>
+            </div>
+            <div class="stat-card">
+              <strong>Spread awareness</strong>
+              <p>Mention us in your social media.</p>
+            </div>
+            <div class="stat-card">
+              <strong>Reach out</strong>
+              <p>Partner with us, be part of a major impact.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="shape"></div>
+          <div class="image-main">
+            <img src="https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&w=1200&q=80" alt="Women studying together in a bright learning space">
+          </div>
+          <div class="image-small">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Young women learning and collaborating">
+          </div>
+          <div class="hero-badge">
+            <strong>Local change, lasting impact</strong>
+            <p>Built with educators, volunteers, families, publishers, and purpose-driven brands.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container mission-wrap">
+        <div class="mission-card">
+          <span class="eyebrow">Who we are</span>
+          <h2>A social club rooted in learning and community.</h2>
+          <p>
+            She Learns Program brings together students, volunteers, local mentors, donors, and collaborators to support the education of women in rural Guizhou. We aim to make learning welcoming, accessible, and empowering through safe spaces, books, workshops, and practical resources.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Literacy Support</span>
+            <span class="pill">Digital Skills</span>
+            <span class="pill">Community Mentorship</span>
+            <span class="pill">Women-Led Learning</span>
+          </div>
+        </div>
+
+        <div class="mission-card">
+          <span class="eyebrow">Our vision</span>
+          <h2>Education that opens futures.</h2>
+          <p>
+            We believe that when women gain access to education, entire communities benefit. Our vision is to strengthen confidence, opportunity, and independence by building meaningful educational pathways that are locally supported and culturally respectful.
+          </p>
+          <div class="btn-group">
+            <a class="btn btn-primary" href="#register">Join the program</a>
+            <a class="btn btn-secondary" href="#partners">Become a partner</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="programs">
+      <div class="container">
+        <span class="eyebrow">What we do</span>
+        <h2>Programs designed for access, confidence, and growth.</h2>
+        <p style="max-width: 760px;">
+          Our initiatives blend formal and informal learning so women can engage in ways that suit their lives, responsibilities, and ambitions.
+        </p>
+
+        <div class="program-grid">
+          <div class="program-card">
+            <div class="program-icon">📚</div>
+            <h3>Learning Circles</h3>
+            <p>Small community-based classes focused on reading, writing, language, and peer support in welcoming local spaces.</p>
+          </div>
+
+          <div class="program-card">
+            <div class="program-icon">💻</div>
+            <h3>Digital Skills</h3>
+            <p>Practical lessons in computer basics, online safety, communication tools, and digital confidence for modern opportunities.</p>
+          </div>
+
+          <div class="program-card">
+            <div class="program-icon">🌱</div>
+            <h3>Mentorship & Wellbeing</h3>
+            <p>Guidance from volunteers and mentors that supports confidence-building, long-term aspirations, and personal growth.</p>
+          </div>
+
+          <div class="program-card">
+            <div class="program-icon">🧵</div>
+            <h3>Creative Workshops</h3>
+            <p>Hands-on sessions that combine storytelling, art, cultural knowledge, and practical making as part of learning.</p>
+          </div>
+
+          <div class="program-card">
+            <div class="program-icon">🏫</div>
+            <h3>Resource Hubs</h3>
+            <p>Book corners, shared materials, and flexible spaces where women can study, gather, and continue learning together.</p>
+          </div>
+
+          <div class="program-card">
+            <div class="program-icon">🤝</div>
+            <h3>Volunteer Exchange</h3>
+            <p>Meaningful volunteer opportunities that connect skilled supporters with rural learning communities and local leaders.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="impact">
+      <div class="container impact-grid">
+        <div class="impact-image">
+          <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1200&q=80" alt="Classroom and education support">
+        </div>
+
+        <div>
+          <span class="eyebrow">Our impact</span>
+          <h2>Support that reaches beyond the classroom.</h2>
+          <p>
+            We focus on education as a pathway to confidence, participation, and greater choice. By supporting women with practical tools and community connection, the program creates benefits that extend to families and villages.
+          </p>
+
+          <div class="impact-list">
+            <div class="impact-item">
+              <span>01</span>
+              <div>
+                <h3>Improved access to learning</h3>
+                <p>Flexible local programs reduce barriers and bring educational support closer to where women live.</p>
+              </div>
+            </div>
+
+            <div class="impact-item">
+              <span>02</span>
+              <div>
+                <h3>Confidence and capability</h3>
+                <p>Participants build practical literacy and digital skills that support study, work, and everyday independence.</p>
+              </div>
+            </div>
+
+            <div class="impact-item">
+              <span>03</span>
+              <div>
+                <h3>Stronger community networks</h3>
+                <p>Learning groups become spaces for solidarity, mentorship, and sustained local leadership among women.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="partners">
+      <div class="container">
+        <span class="eyebrow">Collaborations</span>
+        <h2>Working with books, publishers, and purpose-led brands.</h2>
+        <p style="max-width: 800px;">
+          The program grows through collaboration. We welcome partnerships with bookstores, libraries, educational publishers, stationery providers, women-led businesses, and brands that want to support education meaningfully.
+        </p>
+
+        <div class="partner-grid">
+          <div class="partner-card">
+            <div class="partner-logo">BK</div>
+            <h3>Book Partners</h3>
+            <p>Book drives, curated reading collections, and literacy kits for rural learning circles.</p>
+          </div>
+
+          <div class="partner-card">
+            <div class="partner-logo">PB</div>
+            <h3>Publishers</h3>
+            <p>Access to translated texts, educational materials, journals, and culturally relevant reading resources.</p>
+          </div>
+
+          <div class="partner-card">
+            <div class="partner-logo">BR</div>
+            <h3>Brands</h3>
+            <p>Support through sponsorships, supplies, scholarships, transport, technology, and awareness campaigns.</p>
+          </div>
+
+          <div class="partner-card">
+            <div class="partner-logo">CL</div>
+            <h3>Community Leaders</h3>
+            <p>Local collaboration ensures programs are responsive, respectful, and grounded in real community needs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="register">
+      <div class="container">
+        <div class="cta-panel">
+          <div>
+            <span class="eyebrow" style="color:#eed0b3;">Join us</span>
+            <h2>Register for the She Learns Program</h2>
+            <p>Sign up to join a learning circle, receive updates, or express interest in future workshops and community events.</p>
+          </div>
+          <div class="btn-group" style="margin-top:0;">
+            <a class="btn btn-secondary" href="#contact">Start registration</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="volunteer">
+      <div class="container mission-wrap">
+        <div class="card">
+          <span class="eyebrow">Volunteer</span>
+          <h2>Contribute your time and skills.</h2>
+          <p>
+            We welcome volunteers who can support literacy sessions, digital learning, mentoring, fundraising, communications, translation, and community outreach.
+          </p>
+          <div class="btn-group">
+            <a class="btn btn-primary" href="#contact">Apply to volunteer</a>
+          </div>
+        </div>
+
+        <div class="card" id="donate">
+          <span class="eyebrow">Donate</span>
+          <h2>Help fund books, technology, and learning spaces.</h2>
+          <p>
+            Your donation can help provide study materials, safe learning environments, travel support, and educational opportunities for women across rural communities.
+          </p>
+          <div class="btn-group">
+            <a class="btn btn-primary" href="#contact">Make a donation</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <span class="eyebrow">Contact us</span>
+        <h2>Get in touch</h2>
+        <p style="max-width: 740px;">Use the form below to register, volunteer, donate, or ask about partnership opportunities.</p>
+
+        <div class="contact-grid">
+          <div class="card">
+            <form class="contact-form">
+              <input type="text" placeholder="Full name" required>
+              <input type="email" placeholder="Email address" required>
+              <select required>
+                <option value="">I want to...</option>
+                <option>Register</option>
+                <option>Volunteer</option>
+                <option>Donate</option>
+                <option>Partner / Collaborate</option>
+              </select>
+              <textarea placeholder="Your message"></textarea>
+              <button type="submit" class="btn btn-primary">Send inquiry</button>
+            </form>
+          </div>
+
+          <div class="card">
+            <h3>Collaboration enquiries</h3>
+            <p style="margin-bottom: 18px;">
+              We would love to hear from bookstores, publishers, libraries, women-led businesses, educational organisations, and socially responsible brands.
+            </p>
+
+            <div class="impact-list" style="margin-top:0;">
+              <div class="impact-item">
+                <span>✦</span>
+                <div>
+                  <h3>Books & resources</h3>
+                  <p>Donate learning materials, reading sets, stationery, or multilingual educational resources.</p>
+                </div>
+              </div>
+
+              <div class="impact-item">
+                <span>✦</span>
+                <div>
+                  <h3>Brand sponsorship</h3>
+                  <p>Support scholarships, technology access, transport, workshops, or community events.</p>
+                </div>
+              </div>
+
+              <div class="impact-item">
+                <span>✦</span>
+                <div>
+                  <h3>Shared campaigns</h3>
+                  <p>Co-create awareness campaigns that celebrate women’s education and rural opportunity.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="#home" class="brand" style="margin-bottom: 12px; display:inline-flex;">
+            <div class="brand-mark">S</div>
+            <div>
+              She Learns Program
+              <small>Education • Equity • Opportunity</small>
+            </div>
+          </a>
+          <p>Supporting educational access for women in rural Guizhou through community learning, partnerships, and care.</p>
+        </div>
+
+        <div>
+          <h3>Navigate</h3>
+          <ul class="footer-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#programs">Programs</a></li>
+            <li><a href="#impact">Impact</a></li>
+            <li><a href="#partners">Partners</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Get involved</h3>
+          <ul class="footer-links">
+            <li><a href="#register">Register</a></li>
+            <li><a href="#volunteer">Volunteer</a></li>
+            <li><a href="#donate">Donate</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Collaborate</h3>
+          <ul class="footer-links">
+            <li>Books & libraries</li>
+            <li>Publishers</li>
+            <li>Purpose-led brands</li>
+            <li>Community organisations</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="copyright">© 2026 She Learns Program.</p>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.querySelector('.contact-form');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      alert('Thank you for your interest in the She Learns Program. Your inquiry has been received.');
+      form.reset();
+    });
+  </script>
+</body>
+</html>
